@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ dump(form.sales) }}
+    {{ form_start(form.sales) }}
+        {{ form_row(form.sales) }}
+    {{ form_end(form.sales) }}
+{% endblock %}

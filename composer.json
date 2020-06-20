@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "fzaninotto/faker": "^1.9",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
@@ -20,6 +21,7 @@
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.1.*",
         "symfony/orm-pack": "*",
+        "symfony/polyfill-php73": "^1.17",
         "symfony/process": "5.1.*",
         "symfony/security-bundle": "5.1.*",
         "symfony/serializer-pack": "*",
@@ -28,9 +30,13 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.1.*",
         "symfony/web-link": "5.1.*",
-        "symfony/yaml": "5.1.*"
+        "symfony/webpack-encore-bundle": "^1.7",
+        "symfony/yaml": "5.1.*",
+        "twig/extensions": "v1.5.4",
+        "twig/intl-extra": "^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
