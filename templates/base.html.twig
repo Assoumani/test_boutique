@@ -24,7 +24,7 @@
         </ul>
         <a href="{{ path('cart_show') }}" class="btn btn-outline-info my-2 my-sm-0" type="submit">
             <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-            <span class="badge">{{ app.session.get('cart') ? app.session.get('cart').sales.count : 0}}</span>
+            <span class="badge">{{ app.session.get('cart') ? app.session.get('cart').count : 0}}</span>
         </a>
     </div>
 </nav>

@@ -3,7 +3,7 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    {{ dump(app.session) }}
+    {{ dump(app.session.get('cart')) }}
     <div class="row row-cols-sm-1 row-cols-md-3">
         {% for product in products %}
             <div class="card col-sm-12 col-md-3 m-1 p-2">

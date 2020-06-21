@@ -32,6 +32,11 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sale::class, inversedBy="products")
+     */
+    private $sale;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,9 +78,21 @@ class Product
         return $this;
     }
 
-//    public function __toString()
-//    {
-//        return (string) $this->name;
-//    }
+    public function getSale(): ?Sale
+    {
+        return $this->sale;
+    }
+
+    public function setSale(?Sale $sale): self
+    {
+        $this->sale = $sale;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->name;
+    }
 }
 
