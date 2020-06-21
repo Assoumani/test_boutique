@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+{% if form.children|length > 1 %}
+    {% for sale in form.children %}
+        {% if sale|length > 0 %}
+            <div>
+                {#                {{ dump(sale.product.vars.data.name) }}#}
+                {{ sale.product.vars.data.name }}
+                {{ form_widget(sale.product, { 'attr': {'hidden': true} }) }}
+                {{ form_widget(sale.count, {
+                    'attr': {
+                    'class': 'form-control'
+                    }}) }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h3>Panier vide !</h3>
+{% endif %}
+<div>Prix de la commande TTC : {{ price }} €</div>
+<button class="btn btn-outline-success mt-2" type="submit">Valider</button>
+{{ form_end(form, {'render_rest': false}) }}

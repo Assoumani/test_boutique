@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\DTO\SaleDTO;
 use App\Entity\Product;
-use App\Entity\Sale;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -16,16 +16,16 @@ class SaleType extends AbstractType
     {
         $builder
             ->add('count', IntegerType::class)
-            ->add('products', EntityType::class, [
+            ->add('product', EntityType::class, [
                 'class' => Product::class,
-                'multiple' => true
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Sale::class,
+            'data_class' => SaleDTO::class
         ]);
     }
 }

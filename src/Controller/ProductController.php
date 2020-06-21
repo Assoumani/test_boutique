@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\DTO\SaleDTO;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SaleType;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +28,6 @@ class ProductController extends AbstractController
      */
     public function index(SessionInterface $session, ProductRepository $productRepository): Response
     {
-        dump($session->get('cart'));
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -56,12 +59,42 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/{id}", name="product_show", methods={"GET", "POST"})
+     * @param Request $request
+     * @param Product $product
+     * @param SessionInterface $session
+     * @return Response
      */
-    public function show(Product $product): Response
+    public function show(Request $request, Product $product, SessionInterface $session): Response
     {
+        $sale = new SaleDTO();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($product);
+        $sale->setProduct($product);
+        $form = $this->createForm(SaleType::class, $sale, []);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            dump($form->getData());
+            $cart = $session->get('cart', new ArrayCollection());
+            if (!$cart->exists(function($key, $value) use ($form) {return $value->getId() == $form->getData()->getId();})) {
+                $cart->add($form->getData());
+                $session->set('cart', $cart);
+                return $this->redirectToRoute('product_index');
+            }
+            $saleToUpdate = $cart->filter(function ($sale) use ($form) {
+                return $sale->getId() == $form->getData()->getId();
+            });
+            dump($saleToUpdate);
+            $count = $saleToUpdate->first()->getCount() + $form->getData()->getCount();
+            $saleToUpdate->first()->setCount($count);
+
+            return $this->redirectToRoute('product_index');
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'form' => $form->createView()
         ]);
     }
 
