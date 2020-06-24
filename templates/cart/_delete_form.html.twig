@@ -1,5 +1,10 @@
-<form method="post" action="{{ path('cart_delete') }}" onsubmit="return confirm('Êtes vous sûr de vouloir vider le panier?');">
+<form method="post" action="{{ path('cart_empty') }}" onsubmit="return confirm('{% trans %}Êtes vous sûr de vouloir vider ce panier?{% endtrans %}');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ 'toto') }}">
-    <button class="btn btn-outline-danger mt-2">Vider le panier</button>
+    <button class="btn btn-outline-danger mr-auto">
+        <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> <br>
+        <small>
+            {% trans %}vider le panier{% endtrans %}
+        </small>
+    </button>
 </form>

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,17 @@ class Product
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
+    public function __construct()
+    {
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->name);
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,19 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($slug);
 
         return $this;
     }

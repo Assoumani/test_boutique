@@ -1,0 +1,18 @@
+Accueil: Home
+'vider le panier': 'clear the cart'
+Valider: Validate
+'Panier vide !': 'Empty cart!'
+'Total commande TTC': 'Total amount inc.'
+Produits: Products
+'Voir la fiche': 'show the notice'
+'Pas d''enregistrements trouvés': 'no records found'
+Produit: __Product
+'Retour à l''accueil': 'Return to home'
+'Prix TTC': 'Price inc.'
+Description: Description
+Quantité: Quantity
+'Product index': 'Product index'
+'no records found': 'no records found'
+Product: Product
+'Ajouter au panier': 'Add to cart'
+'Êtes vous sûr de vouloir vider ce panier?': 'Are you sure you want to empty this cart?'

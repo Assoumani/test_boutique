@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/cart")
+ * @Route("{_locale}/cart")
  */
 class CartController extends AbstractController
 {
@@ -67,7 +67,6 @@ class CartController extends AbstractController
         foreach ($cart as $dto) {
             $em->persist($dto->getProduct());
         }
-        dump($cart);
         $form = $this->createForm(CollectionType::class, $cart, [
             'entry_type' => SaleType::class,
             'allow_delete' => true,
@@ -82,27 +81,41 @@ class CartController extends AbstractController
             $price += ($sale->getCount() * $sale->getProduct()->getPrice());
         }
         if ($form->isSubmitted()) {
-            dump($form->getData());
             $price = 0;
             foreach ($form->getData() as $sale) {
                 $price += ($sale->getCount() * $sale->getProduct()->getPrice());
             }
         }
-        dump($price);
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
             'form' => $form->createView(),
             'price' => $price
         ]);
     }
 
     /**
-     * @Route("/delete", name="cart_delete")
-     * @param Request $request
+     * @Route("/{id}/remove", name="cart_remove_product")
+     * @param SessionInterface $session
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function remove(SessionInterface $session, Product $product)
+    {
+        $cart = $session->get('cart');
+        $productToRemove = $cart->filter(function($element) use ($product) {
+            return $element->getProduct() == $product;
+        });
+        dump($cart, $productToRemove->first());
+        $cart->removeElement($productToRemove->first());
+        dump($cart);
+        return $this->redirectToRoute('cart_show');
+    }
+
+    /**
+     * @Route("/empty", name="cart_empty")
      * @param SessionInterface $session
      * @return RedirectResponse
      */
-    public function edit(Request $request, SessionInterface $session)
+    public function delete(SessionInterface $session)
     {
         $session->set('cart', new ArrayCollection());
         return $this->redirectToRoute('product_index');

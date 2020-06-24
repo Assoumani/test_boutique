@@ -8,7 +8,6 @@ use App\Form\ProductType;
 use App\Form\SaleType;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,18 +15,19 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/product")
+ * @Route("{_locale}/product")
  */
 class ProductController extends AbstractController
 {
     /**
      * @Route("/", name="product_index", methods={"GET"})
-     * @param SessionInterface $session
+     * @param Request $request
      * @param ProductRepository $productRepository
      * @return Response
      */
-    public function index(SessionInterface $session, ProductRepository $productRepository): Response
+    public function index(Request $request, ProductRepository $productRepository): Response
     {
+        dump($request->getLocale());
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -40,6 +40,7 @@ class ProductController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -59,7 +60,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET", "POST"})
+     * @Route("/{slug}", name="product_show", methods={"GET", "POST"})
      * @param Request $request
      * @param Product $product
      * @param SessionInterface $session
@@ -67,6 +68,7 @@ class ProductController extends AbstractController
      */
     public function show(Request $request, Product $product, SessionInterface $session): Response
     {
+        dump($request->getLocale());
         $sale = new SaleDTO();
         $em = $this->getDoctrine()->getManager();
         $em->persist($product);
@@ -85,7 +87,6 @@ class ProductController extends AbstractController
             $saleToUpdate = $cart->filter(function ($sale) use ($form) {
                 return $sale->getId() == $form->getData()->getId();
             });
-            dump($saleToUpdate);
             $count = $saleToUpdate->first()->getCount() + $form->getData()->getCount();
             $saleToUpdate->first()->setCount($count);
 

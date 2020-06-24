@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Product;
 use App\Entity\User;
+use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -20,12 +21,14 @@ class DataFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $slugify = new Slugify();
         $faker = Faker\Factory::create();
         for ($i = 0; $i < 12; $i++) {
             $product = new Product();
             $product->setName($faker->company);
             $product->setDescription($faker->realText(100, 2));
             $product->setPrice($faker->randomFloat(2, 8, 950));
+            $product->setSlug($product->getName());
             $manager->persist($product);
         }
         $manager->flush();

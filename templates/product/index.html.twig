@@ -1,23 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}
+    {% trans %}Product index{% endtrans %}
+{% endblock %}
 
 {% block body %}
-    {{ dump(app.session.get('cart')) }}
     <div class="row row-cols-sm-1 row-cols-md-3">
         {% for product in products %}
-            <div class="card col-sm-12 col-md-3 m-1 p-2">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card col-sm-12 col-md-3 m-3 p-2 border-info">
+                <img src='https://picsum.photos/id/{{product.id}}/800/500' class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5><hr>
-                    <h5 class="card-title">{{ product.price | format_currency('EUR') }}</h5><hr>
+                    <h5 class="card-title">{{ product.price | format_currency('EUR', [], 'fr') }}</h5><hr>
                     <p class="card-text">{{ product.description }}</p>
-                    <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-outline-info">Voir la fiche</a>
+                    <a href="{{ path('product_show', {slug: product.slug}) }}" class="btn btn-outline-info">
+                        {% trans %}Voir la fiche{% endtrans %}
+                    </a>
                 </div>
             </div>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">
+                    {% trans %}no records found{% endtrans %}
+                </td>
             </tr>
         {% endfor %}
     </div>

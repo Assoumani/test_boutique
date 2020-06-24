@@ -1,15 +1,14 @@
 security:
     encoders:
-        App\Entity\User:
-            algorithm: auto
+        Symfony\Component\Security\Core\User\User: 'auto'
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: email
+        backend_users:
+            memory:
+                users:
+                    admin: {password: '$argon2id$v=19$m=65536,t=4,p=1$TmlGZFNPTXBtVi94Q20ydQ$nwKgstEg0IeDQwDFjaOZ4WCPENV0d294FW+8Xtz2Q2c', roles: ['ROLE_ADMIN']}
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -17,8 +16,13 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: app_user_provider
-
+            provider: backend_users
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                target: app_login
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -28,5 +32,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
