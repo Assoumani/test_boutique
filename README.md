@@ -40,7 +40,10 @@ $ php bin/console doctrine:fixtures:load
 ## 4. preparing
 
 ```
-$ php bin/console cache:clear
+$ APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
+```
+```
+In your .env file change APP_ENV=dev to APP_ENV=prod
 ```
 
 ## 5. Run project
