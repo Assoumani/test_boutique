@@ -1,6 +1,6 @@
 # Test Boutique
 
-As part of a recruitment, I had to make a web application for an ecommerce site respecting a specification. Here is the result
+As part of a recruitment, I had to make a web application for an ecommerce website respecting a specification. Here is the result
 
 ## 1. Import project
 
