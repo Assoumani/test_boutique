@@ -52,6 +52,23 @@ $ php -S localhost:8000 -t public ## (port 8000 must be free, if not choose anot
 $ In your browser, navigate to [http://localhost:8000](http://localhost:8000)
 ```
 
+
+## 6. Usage
+How to access admin dashboard 
+```
+http://localhost:8000/en/admin
+    login: admin
+    password: password
+```
+How to access to the API
+```
+http://localhost:8000/api/products
+```
+How to play tests
+```
+
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
