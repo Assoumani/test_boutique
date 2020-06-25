@@ -47,14 +47,16 @@ In your .env file change APP_ENV=dev to APP_ENV=prod
 ```
 
 ## 5. Run project
-
+Using symfony server (recommanded)
+```
+$ symfony serve
+$ symfony open:local (to navigate to the home page)
+```
+Using php server
 ```
 $ php -S localhost:8000 -t public ## (port 8000 must be free, if not choose another one free in place)
 ```
-```
 In your browser, navigate to http://localhost:8000
-```
-
 
 ## 6. Usage
 How to access admin dashboard 
