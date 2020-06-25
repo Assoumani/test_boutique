@@ -66,7 +66,8 @@ http://localhost:8000/api/products
 ```
 How to play tests
 ```
-
+$ php bin/phpunit tests/Util
+$ php bin/phpunit tests/Controller
 ```
 
 ## Contributing
