@@ -13,7 +13,7 @@ $ git clone https://github.com/Assoumani/test_boutique.git
 $ cd test_boutique
 ```
 
-## 2. instal project
+## 2. install project
 
 ```
 $ composer install
