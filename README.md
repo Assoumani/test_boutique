@@ -69,6 +69,10 @@ How to play tests
 $ php bin/phpunit tests/Util
 $ php bin/phpunit tests/Controller
 ```
+How to export products in csv file
+```
+http://localhost:8000/csv
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
