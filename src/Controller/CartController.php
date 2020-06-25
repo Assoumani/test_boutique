@@ -97,9 +97,7 @@ class CartController extends AbstractController
         $productToRemove = $cart->filter(function($element) use ($product) {
             return $element->getProduct() == $product;
         });
-        dump($cart, $productToRemove->first());
         $cart->removeElement($productToRemove->first());
-        dump($cart);
         return $this->redirectToRoute('cart_show');
     }
 

@@ -27,7 +27,6 @@ class ProductController extends AbstractController
      */
     public function index(Request $request, ProductRepository $productRepository): Response
     {
-        dump($request->getLocale());
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -68,7 +67,6 @@ class ProductController extends AbstractController
      */
     public function show(Request $request, Product $product, SessionInterface $session): Response
     {
-        dump($request->getLocale());
         $sale = new SaleDTO();
         $em = $this->getDoctrine()->getManager();
         $em->persist($product);
@@ -77,7 +75,6 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
-            dump($form->getData());
             $cart = $session->get('cart', new ArrayCollection());
             if (!$cart->exists(function($key, $value) use ($form) {return $value->getId() == $form->getData()->getId();})) {
                 $cart->add($form->getData());
