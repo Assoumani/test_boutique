@@ -64,14 +64,14 @@ How to access to the API
 ```
 http://localhost:8000/api/products
 ```
+How to export products in csv file
+```
+http://localhost:8000/csv
+```
 How to play tests
 ```
 $ php bin/phpunit tests/Util
 $ php bin/phpunit tests/Controller
-```
-How to export products in csv file
-```
-http://localhost:8000/csv
 ```
 
 ## Contributing
