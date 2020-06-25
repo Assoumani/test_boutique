@@ -49,7 +49,7 @@ $ php bin/console cache:clear
 $ php -S localhost:8000 -t public ## (port 8000 must be free, if not choose another one free in place)
 ```
 ```
-$ In your browser, navigate to [http://localhost:8000](http://localhost:8000)
+In your browser, navigate to http://localhost:8000
 ```
 
 
@@ -72,7 +72,6 @@ $ php bin/phpunit tests/Controller
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 Please make sure to update tests as appropriate.
 
 ## License
