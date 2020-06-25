@@ -3,15 +3,11 @@
 namespace App\Controller;
 
 use App\DTO\SaleDTO;
-use App\Entity\Cart;
 use App\Entity\Product;
-use App\Entity\Sale;
-use App\Form\CartType;
 use App\Form\SaleType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
