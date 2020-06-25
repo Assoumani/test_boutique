@@ -27,8 +27,8 @@ class DataFixtures extends Fixture
             $product = new Product();
             $product->setName($faker->company);
             $product->setDescription($faker->realText(100, 2));
-            $product->setPrice($faker->randomFloat(2, 8, 950));
-            $product->setSlug($product->getName());
+            $product->setPrice($faker->randomFloat(2, 8, 250));
+            $product->setSlug($slugify->slugify($product->getName()));
             $manager->persist($product);
         }
         $manager->flush();
