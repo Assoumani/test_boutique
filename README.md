@@ -4,8 +4,6 @@ As part of a recruitment, I had to make a web application for an ecommerce websi
 
 ## 1. Import project
 
-Requirements : composer and npm
-
 ```
 $ git clone https://github.com/Assoumani/test_boutique.git
 ```
@@ -14,6 +12,8 @@ $ cd test_boutique
 ```
 
 ## 2. install project
+
+Requirements : composer and npm
 
 ```
 $ composer install
