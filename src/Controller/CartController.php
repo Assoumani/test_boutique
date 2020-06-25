@@ -3,15 +3,12 @@
 namespace App\Controller;
 
 use App\DTO\SaleDTO;
-use App\Entity\Cart;
 use App\Entity\Product;
-use App\Entity\Sale;
-use App\Form\CartType;
 use App\Form\SaleType;
+use App\Util\CartPriceCalculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,19 +73,15 @@ class CartController extends AbstractController
         ]);
         $form->handleRequest($request);
 
-        $price = 0;
-        foreach ($cart as $sale) {
-            $price += ($sale->getCount() * $sale->getProduct()->getPrice());
-        }
+        $calculator = new CartPriceCalculator();
+        $collection = $cart;
         if ($form->isSubmitted()) {
-            $price = 0;
-            foreach ($form->getData() as $sale) {
-                $price += ($sale->getCount() * $sale->getProduct()->getPrice());
-            }
+            $collection = $form->getData();
         }
+
         return $this->render('cart/index.html.twig', [
             'form' => $form->createView(),
-            'price' => $price
+            'price' => $calculator->calculate($collection)
         ]);
     }
 
