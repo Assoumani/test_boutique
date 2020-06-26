@@ -38,7 +38,7 @@ $ php bin/console doctrine:database:create
 $ php bin/console doctrine:schema:update --force
 ```
 ```
-$ php bin/console doctrine:fixtures:load
+$ php bin/console doctrine:fixtures:load (Respond "yes" about the database's purge)
 ```
 
 ## 4. preparing
@@ -53,7 +53,7 @@ In your .env file change APP_ENV=dev to APP_ENV=prod
 ## 5. Run project
 Using symfony server (recommanded)
 ```
-$ symfony serve
+$ symfony serve -d
 $ symfony open:local (to navigate to the home page)
 ```
 Using php server
