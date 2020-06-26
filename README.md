@@ -2,6 +2,8 @@
 
 As part of a recruitment, I had to make a web application for an ecommerce website respecting a specification. Here is the result
 
+Here is the specs : https://github.com/Assoumani/test_boutique/blob/master/Test%20Symfony.pdf 
+
 ## 1. Import project
 
 ```
